@@ -1,0 +1,256 @@
+openapi: 3.0.3openapi: 3.0.3
+
+info:info:
+
+  title: Coffee Memo API  title: Coffee Memo API
+
+  version: 1.0.0  version: 1.0.0
+
+  description: コーヒーメモ管理用API  description: コーヒーメモ管理用API
+
+
+
+servers:servers:
+
+  - url: http://localhost:3000/api  - url: http://localhost:3000/api
+
+
+
+paths:paths:
+
+  /coffee:  /coffee:
+
+    get:    get:
+
+      summary: コーヒー一覧取得      summary: コーヒー一覧取得
+
+      responses:      responses:
+
+        '200':        '200':
+
+          description: コーヒー一覧          description: コーヒー一覧
+
+          content:          content:
+
+            application/json:            application/json:
+
+              schema:              schema:
+
+                type: array                type: array
+
+                items:                items:
+
+                  $ref: '#/components/schemas/Coffee'                  $ref: '#/components/schemas/Coffee'
+
+    post:    post:
+
+      summary: コーヒー情報登録      summary: コーヒー情報登録
+
+      requestBody:      requestBody:
+
+        required: true        required: true
+
+        content:        content:
+
+          application/json:          application/json:
+
+            schema:            schema:
+
+              $ref: '#/components/schemas/CoffeeInput'              $ref: '#/components/schemas/CoffeeInput'
+
+      responses:      responses:
+
+        '201':        '201':
+
+          description: 登録成功          description: 登録成功
+
+          content:          content:
+
+            application/json:            application/json:
+
+              schema:              schema:
+
+                $ref: '#/components/schemas/Coffee'                $ref: '#/components/schemas/Coffee'
+
+
+
+  /coffee/{id}:  /coffee/{id}:
+
+    get:    get:
+
+      summary: コーヒー詳細取得      summary: コーヒー詳細取得
+
+      parameters:      parameters:
+
+        - name: id        - name: id
+
+          in: path          in: path
+
+          required: true          required: true
+
+          schema:          schema:
+
+            type: string            type: string
+
+      responses:      responses:
+
+        '200':        '200':
+
+          description: コーヒー詳細          description: コーヒー詳細
+
+          content:          content:
+
+            application/json:            application/json:
+
+              schema:              schema:
+
+                $ref: '#/components/schemas/Coffee'                $ref: '#/components/schemas/Coffee'
+
+    put:    put:
+
+      summary: コーヒー情報更新      summary: コーヒー情報更新
+
+      parameters:      parameters:
+
+        - name: id        - name: id
+
+          in: path          in: path
+
+          required: true          required: true
+
+          schema:          schema:
+
+            type: string            type: string
+
+      requestBody:      requestBody:
+
+        required: true        required: true
+
+        content:        content:
+
+          application/json:          application/json:
+
+            schema:            schema:
+
+              $ref: '#/components/schemas/CoffeeInput'              $ref: '#/components/schemas/CoffeeInput'
+
+      responses:      responses:
+
+        '200':        '200':
+
+          description: 更新成功          description: 更新成功
+
+          content:          content:
+
+            application/json:            application/json:
+
+              schema:              schema:
+
+                $ref: '#/components/schemas/Coffee'                $ref: '#/components/schemas/Coffee'
+
+    delete:    delete:
+
+      summary: コーヒー情報削除      summary: コーヒー情報削除
+
+      parameters:      parameters:
+
+        - name: id        - name: id
+
+          in: path          in: path
+
+          required: true          required: true
+
+          schema:          schema:
+
+            type: string            type: string
+
+      responses:      responses:
+
+        '204':        '204':
+
+          description: 削除成功          description: 削除成功
+
+
+
+  /stats:  /stats:
+
+    get:    get:
+
+      summary: 統計情報取得      summary: 統計情報取得
+
+      responses:      responses:
+
+        '200':        '200':
+
+          description: 統計情報          description: 統計情報
+
+          content:          content:
+
+            application/json:            application/json:
+
+              schema:              schema:
+
+                type: object                type: object
+
+                properties:                properties:
+
+                  total:                  total:
+
+                    type: integer                    type: integer
+
+                  average:                  average:
+
+                    type: number                    type: number
+
+
+
+components:components:
+
+  schemas:  schemas:
+
+    Coffee:    Coffee:
+
+      type: object      type: object
+
+      properties:      properties:
+
+        id:        id:
+
+          type: string          type: string
+
+        name:        name:
+
+          type: string          type: string
+
+        roast:        roast:
+
+          type: string          type: string
+
+        memo:        memo:
+
+          type: string          type: string
+
+        createdAt:        createdAt:
+
+          type: string          type: string
+
+          format: date-time          format: date-time
+
+    CoffeeInput:    CoffeeInput:
+
+      type: object      type: object
+
+      properties:      properties:
+
+        name:        name:
+
+          type: string          type: string
+
+        roast:        roast:
+
+          type: string          type: string
+
+        memo:        memo:
+
+          type: string          type: string
+
