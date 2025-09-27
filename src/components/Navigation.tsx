@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 const navItems = [
   { href: '/', label: 'トップ' },
@@ -8,8 +7,7 @@ const navItems = [
   { href: '/analytics', label: '分析' },
 ]
 
-export default function Navigation() {
-  const pathname = usePathname()
+export default function Navigation({ pathname }: { pathname: string }) {
   return (
     <nav>
       {/* PC: サイドバー */}
