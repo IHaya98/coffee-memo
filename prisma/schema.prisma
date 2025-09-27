@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CoffeeRecord {
+  id          Int      @id @default(autoincrement())
+  variety     String   @db.VarChar(100) // 品種
+  shop        String   @db.VarChar(100) // 店舗名
+  price       Decimal? @db.Decimal(10, 2) // 金額
+  acidity     Int?     @db.SmallInt // 酸味 (1-5)
+  bitterness  Int?     @db.SmallInt // 苦み (1-5)
+  sweetness   Int?     @db.SmallInt // 甘み (1-5)
+  aroma       Int?     @db.SmallInt // 香り (1-5)
+  comment     String?  @db.Text // コメント
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("coffee_records")
+}
