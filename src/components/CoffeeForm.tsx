@@ -25,7 +25,11 @@ interface CoffeeFormProps {
   isLoading?: boolean
 }
 
-export default function CoffeeForm({ onSubmit, initialData, isLoading = false }: CoffeeFormProps) {
+export default function CoffeeForm({
+  onSubmit,
+  initialData,
+  isLoading = false,
+}: CoffeeFormProps) {
   const {
     register,
     handleSubmit,
@@ -47,9 +51,12 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
-          <label htmlFor="variety" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="variety"
+            className="mb-2 block text-sm font-medium text-gray-700"
+          >
             品種 *
           </label>
           <input
@@ -60,12 +67,17 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
             placeholder="例: エチオピア モカ"
           />
           {errors.variety && (
-            <p className="mt-1 text-sm text-red-600">{errors.variety.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.variety.message}
+            </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="shop" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="shop"
+            className="mb-2 block text-sm font-medium text-gray-700"
+          >
             店舗名 *
           </label>
           <input
@@ -81,7 +93,10 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
         </div>
 
         <div>
-          <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="price"
+            className="mb-2 block text-sm font-medium text-gray-700"
+          >
             金額 (円)
           </label>
           <input
@@ -100,17 +115,30 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-lg font-medium text-gray-800">味の評価 (1-5段階)</h3>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <h3 className="text-lg font-medium text-gray-800">
+          味の評価 (1-5段階)
+        </h3>
+
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <div>
-            <label htmlFor="acidity" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="acidity"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
               酸味
             </label>
             <select
-              {...register('acidity', { valueAsNumber: true })}
               id="acidity"
               className="input-field"
+              {...register('acidity', {
+                valueAsNumber: true,
+                onChange: (e) => {
+                  const value =
+                    e.target.value === '' ? undefined : Number(e.target.value)
+                  e.target.value = e.target.value
+                  return value
+                },
+              })}
             >
               <option value="">選択してください</option>
               <option value={1}>1 - 弱い</option>
@@ -122,13 +150,24 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
           </div>
 
           <div>
-            <label htmlFor="bitterness" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="bitterness"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
               苦み
             </label>
             <select
-              {...register('bitterness', { valueAsNumber: true })}
               id="bitterness"
               className="input-field"
+              {...register('bitterness', {
+                valueAsNumber: true,
+                onChange: (e) => {
+                  const value =
+                    e.target.value === '' ? undefined : Number(e.target.value)
+                  e.target.value = e.target.value
+                  return value
+                },
+              })}
             >
               <option value="">選択してください</option>
               <option value={1}>1 - 弱い</option>
@@ -140,13 +179,24 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
           </div>
 
           <div>
-            <label htmlFor="sweetness" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="sweetness"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
               甘み
             </label>
             <select
-              {...register('sweetness', { valueAsNumber: true })}
               id="sweetness"
               className="input-field"
+              {...register('sweetness', {
+                valueAsNumber: true,
+                onChange: (e) => {
+                  const value =
+                    e.target.value === '' ? undefined : Number(e.target.value)
+                  e.target.value = e.target.value
+                  return value
+                },
+              })}
             >
               <option value="">選択してください</option>
               <option value={1}>1 - 弱い</option>
@@ -158,13 +208,24 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
           </div>
 
           <div>
-            <label htmlFor="aroma" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="aroma"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
               香り
             </label>
             <select
-              {...register('aroma', { valueAsNumber: true })}
               id="aroma"
               className="input-field"
+              {...register('aroma', {
+                valueAsNumber: true,
+                onChange: (e) => {
+                  const value =
+                    e.target.value === '' ? undefined : Number(e.target.value)
+                  e.target.value = e.target.value
+                  return value
+                },
+              })}
             >
               <option value="">選択してください</option>
               <option value={1}>1 - 弱い</option>
@@ -178,7 +239,10 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
       </div>
 
       <div>
-        <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-2">
+        <label
+          htmlFor="comment"
+          className="mb-2 block text-sm font-medium text-gray-700"
+        >
           コメント
         </label>
         <textarea
@@ -199,11 +263,7 @@ export default function CoffeeForm({ onSubmit, initialData, isLoading = false }:
         >
           リセット
         </button>
-        <button
-          type="submit"
-          className="btn-primary"
-          disabled={isLoading}
-        >
+        <button type="submit" className="btn-primary" disabled={isLoading}>
           {isLoading ? '保存中...' : '保存'}
         </button>
       </div>
